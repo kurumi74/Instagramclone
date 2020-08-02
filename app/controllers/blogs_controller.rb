@@ -1,5 +1,6 @@
 class BlogsController < ApplicationController
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user, only: [:edit, :update, :destroy]
 
   def index
     @blogs = Blog.all
@@ -58,5 +59,13 @@ class BlogsController < ApplicationController
 
   def set_blog
     @blog = Blog.find(params[:id])
+  end
+
+  def authenticate_user
+    @blog = Blog.find(params[:id])
+    unless current_user.id == @blog.user.id
+      flash[:notice] = "権限がありません"
+      redirect_to blogs_path
+    end
   end
 end

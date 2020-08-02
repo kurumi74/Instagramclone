@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :login_check, only: [:show, :edit, :update]
+
   def new
     @user = User.new
   end
@@ -33,5 +35,14 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password,
                                  :password_confirmation, :image)
+  end
+
+  def login_check
+    @user = User.find(params[:id])
+    if @user == current_user
+      render "edit"
+    else
+      redirect_to new_user_path
+    end
   end
 end
