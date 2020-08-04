@@ -1,21 +1,24 @@
 <h1>ブログ一覧</h1>
-<p><%= notice %></p>
-<table>
-  <tr>
-    <th>タイトル</th>
-    <th>内容</th>
-  </tr>
-<% @blogs.each do |blog| %>
-  <tr>
-    <td><%= blog.user.name %></td>
-    <td><%= blog.content %></td>
-    <td><%= image_tag(blog.image.url) %></td>
-    <td><%= link_to '詳細を確認する', blog_path(blog.id) %></td>
-     <% if blog.user.id == current_user.id %>
-      <td><%= link_to "ブログを編集する", edit_blog_path(blog.id), data: { confirm: '本当に編集していいですか？' } %></td>
-      <td><%= link_to 'ブログを削除する', blog_path(blog.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
-    <% end %>
-  </tr>
-<% end %>
-</table>
+
 <%= link_to '新しくブログを投稿する', new_blog_path %>
+<br>
+<%= link_to 'お気に入り一覧を見る', favorites_path %>
+
+<% @blogs.each do |blog| %>
+  <div class="blog-box">
+    <%= blog.user.name %>
+    <br>
+    <%= blog.content %>
+    <br>
+    <%= image_tag(blog.image.url) %>
+    <br>
+    <%= link_to '詳細を確認する', blog_path(blog.id) %>
+    <br>
+    <% if blog.user.id == current_user.id %>
+      <%= link_to "ブログを編集する", edit_blog_path(blog.id), data: { confirm: '本当に編集していいですか？' } %>
+      <br>
+      <%= link_to 'ブログを削除する', blog_path(blog.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %>
+      <br>
+    <% end %>
+  </div>
+<% end %>

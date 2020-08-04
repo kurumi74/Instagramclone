@@ -1,10 +1,14 @@
 <h1>ブログ詳細画面</h1>
-<p>本文: <%= @blog.content %></p>
-<p>画像: <%= image_tag @blog.image.url %></p>
-<% unless @blog.user_id == current_user.id %>
-  <% if @favorite.present? %>
-    <%= link_to 'お気に入り解除する', favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-danger' %>
-  <% else %>
-    <%= link_to 'お気に入りする', favorites_path(blog_id: @blog.id), method: :post, class: 'btn btn-primary' %>
+
+<div class="blog-box">
+<p>名前: <%= @blog.user.name %></p>
+  <p>本文: <%= @blog.content %></p>
+  <p>画像: <%= image_tag @blog.image.url %></p>
+  <% unless @blog.user_id == current_user.id %>
+    <% if @favorite.present? %>
+      <%= link_to 'お気に入り解除する', favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-danger' %>
+    <% else %>
+      <%= link_to 'お気に入りする', favorites_path(blog_id: @blog.id), method: :post, class: 'btn btn-primary' %>
+    <% end %>
   <% end %>
-<% end %>
+</div>

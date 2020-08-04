@@ -1,15 +1,18 @@
-<h3>以下の内容で、送信する。</h3>
+<div class="blog-box">
+  <h3>以下の内容で、送信する。</h3>
 
-<%= form_with(model: @blog, url: blogs_path, local: true) do |form| %>
-  <%= form.hidden_field :content %>
-  <%= form.hidden_field :image_cache %>
-  <p><%= @blog.content %></p>
-  <%= image_tag(@blog.image.url) if @blog.image && @blog.image.url %>
-  <%= form.submit "投稿する" %>
-<% end %>
+  <%= form_with(model: @blog, url: blogs_path, local: true) do |form| %>
+    <%= form.hidden_field :content %>
+    <%= form.hidden_field :image_cache %>
+    <p><%= @blog.content %></p>
+    <%= image_tag(@blog.image.url) if @blog.image && @blog.image.url %>
+    <br>
+    <%= form.submit "投稿する" %>
+  <% end %>
 
-<%= form_with(model:@blog, url:new_blog_path, local:true, method:"get") do |form| %>
-  <%= form.hidden_field :content %>
-  <%= form.hidden_field :image_cache %>
-  <%= form.submit "戻る", name: "back" %>
-<% end %>
+  <%= form_with(model:@blog, url:new_blog_path, local:true, method:"get") do |form| %>
+    <%= form.hidden_field :content %>
+    <%= form.hidden_field :image_cache %>
+    <%= form.submit "戻る", name: "back" %>
+  <% end %>
+</div>

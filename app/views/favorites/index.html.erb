@@ -1,20 +1,11 @@
 <h1><%= current_user.name %> のお気に入り一覧</h1>
-<br>
-<table class="container">
-  <thead>
-    <tr class="row">
-      <th class="col-md-4">投稿者</th>
-      <th class="col-md-4">画像</th>
-      <th class="col-md-4">投稿内容</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @favorites.each do |favorite| %>
-      <tr class="row">
-        <td class="col-md-4"><%= favorite.blog.user.name %></td>
-        <td class="col-md-4"><%= image_tag favorite.blog.image.url %></td>
-        <td class="col-md-4"><%= favorite.blog.content %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+
+<% @favorites.each do |favorite| %>
+  <div class="blog-box">
+    <p>名前: <%= favorite.blog.user.name %></p>
+    <p>本文: <%= favorite.blog.content %></p>
+    <p>画像: <%= image_tag favorite.blog.image.url %></p>
+  </div>
+<% end %>
+
+<%= link_to "ブログ一覧画面にもどる", blogs_path %>

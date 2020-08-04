@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :login_check, only: [:show, :edit, :update]
+  before_action :login_check, only: [:edit, :update]
 
   def new
     @user = User.new
@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to user_path(@user.id)
+      redirect_to user_path(@user.id), notice: "アカウントを作成しました。ログインしてください"
     else
       render :new
     end
